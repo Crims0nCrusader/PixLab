@@ -13,6 +13,8 @@ public class IntArrayWorker
 
     public int getCount(int value) {
         int count = 0;
+
+
         for(int[] tempArr: matrix) {
             for(int temp: tempArr) {
                 if(temp == value) {
@@ -21,6 +23,28 @@ public class IntArrayWorker
             }
         }
         return count;
+    }
+
+    public int getColTotal () {
+        int colTotal = 0;
+
+
+
+
+        return colTotal;
+    }
+
+    public int getLargest(int value) {
+
+        int largest = 0;
+        for(int[] tempArr: matrix) {
+            for(int temp: tempArr) {
+                if(temp > largest) {
+                    temp++;
+                }
+            }
+        }
+        return largest;
     }
 
     /**
