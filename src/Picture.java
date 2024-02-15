@@ -13,59 +13,58 @@ import java.util.List; // resolves problem with java.awt.List and java.util.List
  *
  * @author Barbara Ericson ericson@cc.gatech.edu
  */
-public class Picture extends SimplePicture
-{
+public class Picture extends SimplePicture {
     ///////////////////// constructors //////////////////////////////////
 
     /**
      * Constructor that takes no arguments
      */
-    public Picture ()
-    {
+    public Picture() {
         /* not needed but use it to show students the implicit call to super()
          * child constructors always call a parent constructor
          */
         super();
     }
 
+
     /**
      * Constructor that takes a file name and creates the picture
+     *
      * @param fileName the name of the file to create the picture from
      */
-    public Picture(String fileName)
-    {
+    public Picture(String fileName) {
         // let the parent class handle this fileName
         super(fileName);
     }
 
     /**
      * Constructor that takes the width and height
+     *
      * @param height the height of the desired picture
-     * @param width the width of the desired picture
+     * @param width  the width of the desired picture
      */
-    public Picture(int height, int width)
-    {
+    public Picture(int height, int width) {
         // let the parent class handle this width and height
-        super(width,height);
+        super(width, height);
     }
 
     /**
      * Constructor that takes a picture and creates a
      * copy of that picture
+     *
      * @param copyPicture the picture to copy
      */
-    public Picture(Picture copyPicture)
-    {
+    public Picture(Picture copyPicture) {
         // let the parent class do the copy
         super(copyPicture);
     }
 
     /**
      * Constructor that takes a buffered image
+     *
      * @param image the buffered image to use
      */
-    public Picture(BufferedImage image)
-    {
+    public Picture(BufferedImage image) {
         super(image);
     }
 
@@ -73,11 +72,11 @@ public class Picture extends SimplePicture
 
     /**
      * Method to return a string with information about this picture.
+     *
      * @return a string with information about the picture such as fileName,
      * height and width.
      */
-    public String toString()
-    {
+    public String toString() {
         String output = "Picture, filename " + getFileName() +
                 " height " + getHeight()
                 + " width " + getWidth();
@@ -85,15 +84,46 @@ public class Picture extends SimplePicture
 
     }
 
-    /** Method to set the blue to 0 */
-    public void zeroBlue()
-    {
+    /**
+     * Method to set the blue to 0
+     */
+    public void zeroBlue() {
         Pixel[][] pixels = this.getPixels2D();
-        for (Pixel[] rowArray : pixels)
-        {
-            for (Pixel pixelObj : rowArray)
-            {
+        for (Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
                 pixelObj.setBlue(0);
+            }
+        }
+    }
+
+    public void keepOnlyBlue() {
+        Pixel[][] pixels = this.getPixels2D();
+        for(Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(0);
+                pixelObj.setGreen(0);
+            }
+        }
+    }
+
+    public void negate() {
+        Pixel[][] pixels = this.getPixels2D();
+        for(Pixel[] rowArray: pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed(255 - pixelObj.getRed());
+                pixelObj.setGreen(255 - pixelObj.getGreen());
+                pixelObj.setBlue(255 - pixelObj.getBlue());
+            }
+        }
+    }
+
+    public void grayScale() {
+        Pixel[][] pixels = this.getPixels2D();
+        for(Pixel[] rowArray : pixels) {
+            for (Pixel pixelObj : rowArray) {
+                pixelObj.setRed((pixelObj.getRed() + pixelObj.getGreen() + pixelObj.getBlue())/3);
+                pixelObj.setGreen((pixelObj.getRed() + pixelObj.getGreen() + pixelObj.getBlue())/3);
+                pixelObj.setBlue((pixelObj.getRed() + pixelObj.getGreen() + pixelObj.getBlue())/3);
             }
         }
     }
